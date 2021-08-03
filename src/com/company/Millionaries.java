@@ -4,128 +4,147 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Millionaries implements ActionListener {
-private JTextArea question;
-private JButton buttonAnswerA;
-private JButton buttonAnswerB;
-private JButton buttonAnswerC;
-private JButton buttonAnswerD;
-private JFrame frameMillionaries;
-private String[] questionAndAnswers;
-private static int questionNumber = 0;
-private static boolean nextQuerstion = false;
-private static boolean correctAnswer = true;
+public class Millionaries {
 
+    String[] questionAndAnswers;
+    JFrame frameMillionaries;
+    JTextArea question;
+
+    JButton buttonAnswerA;
+    JButton buttonAnswerB;
+    JButton buttonAnswerC;
+    JButton buttonAnswerD;
+    JButton start;
+
+    JPanel mainPanel;
+    JPanel bottomPanel;
+    JPanel eastPanel;
+    static int questionNumber = 0;
 
     public static void main(String[] args) {
-    Millionaries game = new Millionaries();
         QuestionList.questionInitializer();
+        Millionaries game = new Millionaries();
         game.makeQuestion();
-        game.guiBuilder();
-
-            while(correctAnswer!=false&&questionNumber<QuestionList.question.size()) {
-                if (nextQuerstion = true){
-                    game.makeQuestion();
-                    game.updateGui();
-                }
-            }
-     }
-public void guiBuilder() {
-    frameMillionaries = new JFrame("Millionaries");
-    frameMillionaries.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    JPanel mainPanel = new JPanel();
-    JPanel bottomPanel = new JPanel();
-    Font bigFont = new Font("sanserif",Font.BOLD,24);
-
-    question = new JTextArea(10,20);
-    question.setFont(bigFont);
-    question.setLineWrap(true);
-    question.setEditable(false);
-    question.setEnabled(true);
-    question.setText(questionAndAnswers[0]);
-
-    JScrollPane scrollPane = new JScrollPane(question);
-    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-
-    buttonAnswerA = new JButton("A."+ questionAndAnswers[1]);
-    buttonAnswerB = new JButton("B."+ questionAndAnswers[2]);
-    buttonAnswerC = new JButton("C."+ questionAndAnswers[3]);
-    buttonAnswerD = new JButton("D."+ questionAndAnswers[4]);
-
-    bottomPanel.add(buttonAnswerA);
-    bottomPanel.add(buttonAnswerB);
-    bottomPanel.add(buttonAnswerC);
-    bottomPanel.add(buttonAnswerD);
-
-    buttonAnswerA.addActionListener(this);
-    buttonAnswerB.addActionListener(this);
-    buttonAnswerC.addActionListener(this);
-    buttonAnswerD.addActionListener(this);
-
-
-
-        JMenuBar menuBar = new JMenuBar();
-    mainPanel.add(scrollPane);
-    frameMillionaries.setJMenuBar(menuBar);
-    frameMillionaries.getContentPane().add(BorderLayout.CENTER,mainPanel);
-    frameMillionaries.getContentPane().add(BorderLayout.SOUTH,bottomPanel);
-    frameMillionaries.setSize(800,600);
-    frameMillionaries.setVisible(true);
-}
-private void updateGui(){
-    buttonAnswerA.setText("A."+ questionAndAnswers[1]);
-    buttonAnswerB.setText("B."+ questionAndAnswers[2]);
-    buttonAnswerC.setText("C."+ questionAndAnswers[3]);
-    buttonAnswerD.setText("D."+ questionAndAnswers[4]);
-    question.setText(questionAndAnswers[0]);
-
-}
-
-
-private void makeQuestion(){
-         questionAndAnswers = QuestionList.question.get(questionNumber).split("/");
-
-}
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        Object source = e.getSource();
-
-            if (source==(buttonAnswerA)&&(questionAndAnswers[1].equals(questionAndAnswers[5]))){
-                System.out.println("Correct answer");
-                questionNumber++;
-                nextQuerstion=true;
-
-            }
-            else if (source==(buttonAnswerB)&&(questionAndAnswers[2].equals(questionAndAnswers[5]))) {
-                System.out.println("Correct answer");
-                questionNumber++;
-                nextQuerstion=true;
-            }
-            else if (source==(buttonAnswerC)&&(questionAndAnswers[3].equals(questionAndAnswers[5]))){
-                System.out.println("Correct answer");
-                questionNumber++;
-                nextQuerstion=true;
-            }
-            else if (source==(buttonAnswerD)&&(questionAndAnswers[4].equals(questionAndAnswers[5]))){
-                System.out.println("Correct answer");
-                questionNumber++;
-                nextQuerstion=true;
-            }
-            else {
-                System.out.println("Wrong Answer, GAME OVER");
-                correctAnswer = false;
-
-            }
-
-        }
+        game.createGui();
+        questionNumber++;
 
     }
+        void makeQuestion() {
+        questionAndAnswers = QuestionList.question.get(questionNumber).split("/");
+        }
+
+        void createGui() {
+            frameMillionaries = new JFrame("Millionaries");
+            frameMillionaries.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            mainPanel = new JPanel();
+            bottomPanel = new JPanel();
+            eastPanel = new JPanel();
+
+            frameMillionaries.getContentPane().add(BorderLayout.EAST, eastPanel);
+            frameMillionaries.getContentPane().add(BorderLayout.CENTER, mainPanel);
+            frameMillionaries.getContentPane().add(BorderLayout.SOUTH, bottomPanel);
+
+            question = new JTextArea(10, 20);
+            Font bigFont = new Font("sanserif", Font.BOLD, 24);
+            question.setFont(bigFont);
+            question.setLineWrap(true);
+            question.setEditable(false);
+            question.setEnabled(true);
+            question.setVisible(false);
+            question.setText(questionAndAnswers[0]);
+
+            JScrollPane scrollPane = new JScrollPane(question);
+            scrollPane.setVisible(true);
+            scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+            scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+
+
+            JMenuBar menuBar = new JMenuBar();
+            mainPanel.add(scrollPane);
+            frameMillionaries.setJMenuBar(menuBar);
+            frameMillionaries.getContentPane().add(BorderLayout.CENTER, mainPanel);
+            frameMillionaries.getContentPane().add(BorderLayout.SOUTH, bottomPanel);
+            frameMillionaries.setSize(800, 600);
+            frameMillionaries.setVisible(true);
+
+            start = new JButton("Start");
+            buttonAnswerA = new JButton("A." + questionAndAnswers[1]);
+            buttonAnswerB = new JButton("B." + questionAndAnswers[2]);
+            buttonAnswerC = new JButton("C." + questionAndAnswers[3]);
+            buttonAnswerD = new JButton("D." + questionAndAnswers[4]);
+
+            bottomPanel.add(buttonAnswerA);
+            bottomPanel.add(buttonAnswerB);
+            bottomPanel.add(buttonAnswerC);
+            bottomPanel.add(buttonAnswerD);
+            eastPanel.add(start);
+
+            buttonAnswerA.addActionListener(new ButtonListiener());
+            buttonAnswerB.addActionListener(new ButtonListiener());
+            buttonAnswerC.addActionListener(new ButtonListiener());
+            buttonAnswerD.addActionListener(new ButtonListiener());
+            start.addActionListener(new ButtonListiener());
+
+            buttonAnswerA.setVisible(false);
+            buttonAnswerB.setVisible(false);
+            buttonAnswerC.setVisible(false);
+            buttonAnswerD.setVisible(false);
+        }
+        void buttonsEnabled()     {
+        buttonAnswerA.setEnabled(false);
+        buttonAnswerB.setEnabled(false);
+        buttonAnswerC.setEnabled(false);
+        buttonAnswerD.setEnabled(false);
+        }
+        void updateGui(){
+            question.setText(questionAndAnswers[0]);
+            buttonAnswerA.setText("A." + questionAndAnswers[1]);
+            buttonAnswerB.setText("B." + questionAndAnswers[2]);
+            buttonAnswerC.setText("C." + questionAndAnswers[3]);
+            buttonAnswerD.setText("D." + questionAndAnswers[4]);
+        }
+        void wrongAnswer()   {
+        System.out.println("Game over");
+            buttonsEnabled();
+            question.setText("Game over");
+        }
+        void correctAnswer(){
+
+            questionNumber++;
+            makeQuestion();
+            updateGui();
+        }
+        void setStart(){
+            buttonAnswerA.setVisible(true);
+            buttonAnswerB.setVisible(true);
+            buttonAnswerC.setVisible(true);
+            buttonAnswerD.setVisible(true);
+            start.setVisible(false);
+            question.setVisible(true);
+        }
+        void viewQuestionValue{
+
+    }
+class ButtonListiener implements ActionListener{
+    public void actionPerformed(ActionEvent click){
+        Object source = click.getSource();
+        if(source.equals(start)) setStart();
+        else{
+        if(source.equals(buttonAnswerA)&&questionAndAnswers[5].equals("A"))      correctAnswer();
+        else if(source.equals(buttonAnswerB)&&questionAndAnswers[5].equals("B")) correctAnswer();
+        else if(source.equals(buttonAnswerC)&&questionAndAnswers[5].equals("C")) correctAnswer();
+        else if(source.equals(buttonAnswerD)&&questionAndAnswers[5].equals("D")) correctAnswer();
+        else {
+            wrongAnswer();
+        }
+            }
+    }
+}
+}
+
 
 
 

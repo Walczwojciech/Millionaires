@@ -8,9 +8,18 @@ public class QuestionList {
 
 
     static void questionInitializer() {
-        question.add("Jakie się nazywa największy ssak na ziemi?/Słoń/Płetwal Błękitny/Niedźwiedź brunatny/Człowiek/Płetwal Błękitny");
-        question.add("Którą planetą od Słońca jest ziemia?/Pierwszą/Trzecią/Piątą/Szóstą/Trzecią");
-        question.add("W którym roku odbył się chrzest Polski?/1070/966/967/980/966");
+        question.add("2+2=?/1/2/3/4/D");
+        question.add("2+2*2=?/8/4/6/12/C");
+        question.add("Which company owns Iphone?/Apple/Motorola/Nokia/Microsoft/A");
+        question.add("2+2=?/1/2/3/4/D");
+        question.add("2+2*2=?/8/4/6/12/C");
+        question.add("Which company owns Iphone?/Apple/Motorola/Nokia/Microsoft/A");
+        question.add("2+2=?/1/2/3/4/D");
+        question.add("2+2*2=?/8/4/6/12/C");
+        question.add("Which company owns Iphone?/Apple/Motorola/Nokia/Microsoft/A");
+        question.add("2+2=?/1/2/3/4/D");
+        question.add("2+2*2=?/8/4/6/12/C");
+        question.add("Which company owns Iphone?/Apple/Motorola/Nokia/Microsoft/A");
 
         }
 
