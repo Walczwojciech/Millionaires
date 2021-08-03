@@ -125,9 +125,9 @@ public class Millionaries {
             start.setVisible(false);
             question.setVisible(true);
         }
-        void viewQuestionValue{
-
-    }
+//        void viewQuestionValue{
+//
+//    }
 class ButtonListiener implements ActionListener{
     public void actionPerformed(ActionEvent click){
         Object source = click.getSource();
